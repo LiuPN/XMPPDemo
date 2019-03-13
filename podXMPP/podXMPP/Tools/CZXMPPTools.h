@@ -42,6 +42,9 @@ extern NSString *const CZLoginResultNotification;
  一旦指定了readonly，同时又重写getter方法，就会屏蔽掉默认的_成员变量！
  */
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
+/// 花名册 保存联系人信息
+@property (nonatomic, strong, readonly) XMPPRoster *xmppRoster;
+@property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *xmppRosterCoreDataStorage;
 
 // 是否是注册用户的标记
 @property (nonatomic, assign) BOOL isRegisterUser;

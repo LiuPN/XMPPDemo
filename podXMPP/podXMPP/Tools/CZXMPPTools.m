@@ -23,7 +23,7 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
 
 //static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
-@interface CZXMPPTools() <XMPPStreamDelegate>
+@interface CZXMPPTools() <XMPPStreamDelegate, XMPPRosterDelegate>
 
 /** 连接失败处理块代码 */
 @property (nonatomic, strong) void (^failed) (NSString *errrorMessage);
@@ -77,10 +77,16 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
         // 重新连接模块就会自动执行重新的工作
         _xmppReconnect = [[XMPPReconnect alloc] init];
         
+        // 管理好友
+        _xmppRosterCoreDataStorage = [XMPPRosterCoreDataStorage sharedInstance];
+        _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage dispatchQueue:dispatch_get_global_queue(0, 0)];
+        _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO; // 不自动添加好友
         // 3. 激活模块
         [_xmppReconnect activate:_xmppStream];
+        [_xmppRoster activate:_xmppStream];
         
         // 4. 添加代理
+        [_xmppRoster addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
         [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
     }
     return _xmppStream;
@@ -90,11 +96,14 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
 - (void)teardownXmppStream {
     // 1. 删除代理
     [_xmppStream removeDelegate:self];
-    
+    [_xmppRoster removeDelegate:self];
     // 2. 禁用模块
     [_xmppReconnect deactivate];
+    [_xmppRoster deactivate];
     
     // 3. 内存清理工作
+    _xmppRosterCoreDataStorage = nil;
+    _xmppRoster = nil;
     _xmppReconnect = nil;
     _xmppStream = nil;
 }
@@ -255,6 +264,28 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
     if (self.failed) {
         dispatch_async(dispatch_get_main_queue(), ^ {self.failed(@"您申请的账号已经被占用！");});
     }
+}
+
+#pragma mark - XMPPRosterDelegate 添加好友
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence{
+    NSLog(@"=========%@", presence.from);
+    
+    // 通知用户 UI修改
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        NSString *message = [NSString stringWithFormat:@"%@添加你为好友，是否同意？", presence.from.user];
+       UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请求通知" message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"通过" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.xmppRoster acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+            
+        }]];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+    });
 }
 
 @end
