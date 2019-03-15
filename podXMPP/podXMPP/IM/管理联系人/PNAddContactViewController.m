@@ -38,8 +38,22 @@
 - (void)addFriendWithName:(NSString *)name{
     
     XMPPJID *jid = [XMPPJID jidWithString:name];
+    
+    // 判断是否已经是好友
+   BOOL exit = [[CZXMPPTools sharedXMPPTools].xmppRosterCoreDataStorage userExistsWithJID:jid xmppStream:[CZXMPPTools sharedXMPPTools].xmppStream];
+    if (exit) {
+        
+       UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"已经是好友" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
+        [self.navigationController presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    
     // 添加订阅
     [[CZXMPPTools sharedXMPPTools].xmppRoster subscribePresenceToUser:jid];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

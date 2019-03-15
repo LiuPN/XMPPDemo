@@ -81,13 +81,20 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
         _xmppRosterCoreDataStorage = [XMPPRosterCoreDataStorage sharedInstance];
         _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterCoreDataStorage dispatchQueue:dispatch_get_global_queue(0, 0)];
         _xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = NO; // 不自动添加好友
+        
+        // 聊天模块
+        _xmppMessageArchivingCoreDataStorage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+        _xmppMessageArchiving = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:_xmppMessageArchivingCoreDataStorage];
+        
         // 3. 激活模块
         [_xmppReconnect activate:_xmppStream];
         [_xmppRoster activate:_xmppStream];
+        [_xmppMessageArchiving activate:_xmppStream];
         
         // 4. 添加代理
         [_xmppRoster addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
         [_xmppStream addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+//        [_xmppMessageArchiving addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
     }
     return _xmppStream;
 }
@@ -97,15 +104,20 @@ NSString *const CZLoginResultNotification = @"CZLoginResultNotification";
     // 1. 删除代理
     [_xmppStream removeDelegate:self];
     [_xmppRoster removeDelegate:self];
+//    [_xmppMessageArchiving removeDelegate:self];
     // 2. 禁用模块
     [_xmppReconnect deactivate];
     [_xmppRoster deactivate];
+    [_xmppMessageArchiving deactivate];
     
     // 3. 内存清理工作
+    _xmppMessageArchivingCoreDataStorage = nil;
+    _xmppMessageArchiving = nil;
     _xmppRosterCoreDataStorage = nil;
     _xmppRoster = nil;
     _xmppReconnect = nil;
     _xmppStream = nil;
+    
 }
 
 #pragma mark - XMPP方法

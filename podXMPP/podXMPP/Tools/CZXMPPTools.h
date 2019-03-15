@@ -46,6 +46,10 @@ extern NSString *const CZLoginResultNotification;
 @property (nonatomic, strong, readonly) XMPPRoster *xmppRoster;
 @property (nonatomic, strong, readonly) XMPPRosterCoreDataStorage *xmppRosterCoreDataStorage;
 
+/// 聊天信息归档
+@property (nonatomic, strong) XMPPMessageArchiving *xmppMessageArchiving;
+@property (nonatomic, strong) XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingCoreDataStorage;
+
 // 是否是注册用户的标记
 @property (nonatomic, assign) BOOL isRegisterUser;
 

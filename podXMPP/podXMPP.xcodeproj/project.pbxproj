@@ -17,6 +17,7 @@
 		D00B5A062237C371005C822F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D00B5A042237C371005C822F /* AppDelegate.m */; };
 		D00B5A0A2237CFE9005C822F /* PLContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D00B5A092237CFE9005C822F /* PLContactViewController.m */; };
 		D00B5A0D2237CFFD005C822F /* PNAddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D00B5A0C2237CFFD005C822F /* PNAddContactViewController.m */; };
+		D0348F74223BA43100447F9E /* PNChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0348F73223BA43100447F9E /* PNChartViewController.m */; };
 		D0B43A3C2213F2F8009CDFB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B43A3B2213F2F8009CDFB3 /* Assets.xcassets */; };
 		D0B43A3F2213F2F8009CDFB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0B43A3D2213F2F8009CDFB3 /* LaunchScreen.storyboard */; };
 		D0B43A422213F2F8009CDFB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B43A412213F2F8009CDFB3 /* main.m */; };
@@ -60,6 +61,8 @@
 		D00B5A092237CFE9005C822F /* PLContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLContactViewController.m; sourceTree = "<group>"; };
 		D00B5A0B2237CFFD005C822F /* PNAddContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNAddContactViewController.h; sourceTree = "<group>"; };
 		D00B5A0C2237CFFD005C822F /* PNAddContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNAddContactViewController.m; sourceTree = "<group>"; };
+		D0348F72223BA43100447F9E /* PNChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNChartViewController.h; sourceTree = "<group>"; };
+		D0348F73223BA43100447F9E /* PNChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNChartViewController.m; sourceTree = "<group>"; };
 		D0B43A2F2213F2F6009CDFB3 /* podXMPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podXMPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B43A3B2213F2F8009CDFB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0B43A3E2213F2F8009CDFB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				D00B5A072237CFBF005C822F /* 管理联系人 */,
+				D0348F71223BA3B500447F9E /* 聊天 */,
 				D00B59FE2237BF15005C822F /* Main.storyboard */,
 				D00B59FD2237BF15005C822F /* CZMainViewController.h */,
 				D00B59FC2237BF14005C822F /* CZMainViewController.m */,
@@ -149,6 +153,15 @@
 				D00B5A0C2237CFFD005C822F /* PNAddContactViewController.m */,
 			);
 			path = "管理联系人";
+			sourceTree = "<group>";
+		};
+		D0348F71223BA3B500447F9E /* 聊天 */ = {
+			isa = PBXGroup;
+			children = (
+				D0348F72223BA43100447F9E /* PNChartViewController.h */,
+				D0348F73223BA43100447F9E /* PNChartViewController.m */,
+			);
+			path = "聊天";
 			sourceTree = "<group>";
 		};
 		D0B43A262213F2F6009CDFB3 = {
@@ -398,6 +411,7 @@
 			files = (
 				D00B5A0A2237CFE9005C822F /* PLContactViewController.m in Sources */,
 				D00B5A0D2237CFFD005C822F /* PNAddContactViewController.m in Sources */,
+				D0348F74223BA43100447F9E /* PNChartViewController.m in Sources */,
 				D00B59F82237BECB005C822F /* CZRegisterUserViewController.m in Sources */,
 				D0B43A422213F2F8009CDFB3 /* main.m in Sources */,
 				D00B5A062237C371005C822F /* AppDelegate.m in Sources */,
