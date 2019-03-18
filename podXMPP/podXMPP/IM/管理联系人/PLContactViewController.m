@@ -10,6 +10,7 @@
 #import "CZXMPPTools.h"
 #import "PNChartViewController.h"
 
+
 @interface PLContactViewController ()<NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -46,6 +47,18 @@
     [self.fetchedResultsController performFetch:NULL];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    /// 连线怕错乱crash
+    if([segue.destinationViewController isKindOfClass:[PNChartViewController class]]){
+        // 传jid
+        PNChartViewController *chatVC = (PNChartViewController *)segue.destinationViewController;
+        
+        NSIndexPath *selIndexPath = [self.tableView indexPathForSelectedRow];
+        XMPPUserCoreDataStorageObject *object = [self.fetchedResultsController objectAtIndexPath:selIndexPath];
+        chatVC.chatJID = object.jid;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -61,9 +74,6 @@
     
     static NSString *ID = @"contentCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
     XMPPUserCoreDataStorageObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     

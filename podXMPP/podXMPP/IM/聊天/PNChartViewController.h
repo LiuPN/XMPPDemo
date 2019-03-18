@@ -12,8 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PNChartViewController : UIViewController
-
-@property (nonatomic, strong) XMPPUserCoreDataStorageObject *currentUser;
+/// 当前聊天的jid
+@property (nonatomic, strong) XMPPJID *chatJID;
 @end
 
 NS_ASSUME_NONNULL_END
