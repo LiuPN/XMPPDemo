@@ -9,7 +9,7 @@
 #import "PNChartViewController.h"
 #import "PNChatCell.h"
 
-@interface PNChartViewController ()<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UITextViewDelegate>
+@interface PNChartViewController ()<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UITextViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /// 聊天tableView
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_bg"]];
     
     NSLog(@"jid:  %@", self.chatJID);
     NSString *str = [NSString stringWithFormat:@"%@", self.chatJID];
@@ -48,30 +49,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.fetchedResultsController.fetchedObjects.count;
 }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *ID = @"chartCell";
-    PNChatCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    XMPPMessageArchiving_Message_CoreDataObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    if(object.body){
-        cell.messageLabel.text = object.body;
-    }else{
-        NSLog(@"对方正在输入...");
-    }
-    
+    PNChatCell *cell = [PNChatCell cellWithTableView:tableView indexPath:indexPath fetchedResultsController:self.fetchedResultsController];
+
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 0;
-    static NSString *ID = @"chartCell";
-    PNChatCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    PNChatCell *cell = [PNChatCell cellWithTableView:tableView indexPath:indexPath fetchedResultsController:self.fetchedResultsController];
 
-    XMPPMessageArchiving_Message_CoreDataObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    if(object.body){
-        cell.messageLabel.text = object.body;
-   
+    if(cell.messageLabel.text){
         height = [cell.messageLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 17 * 2 + 20;
         
         height = height < 60 ? 60 : height;
@@ -142,6 +133,37 @@
     
     
 }
+
+#pragma mark - 选择照片
+- (IBAction)selectedPhoto {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+#pragma UINavigationControllerDelegate, UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+//    NSLog(@"%@", image);
+    NSData *data = UIImagePNGRepresentation(image);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self sendMsgWithData:data];
+    
+    
+}
+- (void)sendMsgWithData:(NSData *)data{
+    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:self.chatJID];
+    
+    [msg addBody:@"image"];
+    // 被迫掉线 图片过大
+    NSString *base64Str = [data base64EncodedStringWithOptions:0];
+    XMPPElement *attachment = [XMPPElement elementWithName:@"attachment" stringValue:base64Str];
+    [msg addChild:attachment];
+    [[CZXMPPTools sharedXMPPTools].xmppStream sendElement:msg];
+    
+}
+
 - (BOOL)isBlankString:(NSString*)string{
     
     NSString *str = [NSString stringWithFormat:@"%@",string];

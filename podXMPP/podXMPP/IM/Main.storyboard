@@ -123,15 +123,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="egb-tX-Y3S">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="egb-tX-Y3S">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chartCell" rowHeight="102" id="Ptg-2Z-rUj" customClass="PNChatCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="receiveCell" rowHeight="102" id="Ptg-2Z-rUj" customClass="PNChatCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ptg-2Z-rUj" id="gsP-1I-9aQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="101.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0Q-vY-AFg">
@@ -144,16 +145,15 @@
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_recive_nor" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-nK-DDG">
                                                     <rect key="frame" x="60" y="10" width="68" height="56"/>
-                                                    <color key="backgroundColor" red="0.94029306989999994" green="0.38864001190000003" blue="0.42983064850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-AA-eIl">
                                                     <rect key="frame" x="80" y="27" width="28" height="22"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="R0Q-vY-AFg" firstAttribute="leading" secondItem="gsP-1I-9aQ" secondAttribute="leading" constant="15" id="48P-LI-xZs"/>
                                                 <constraint firstItem="R0Q-vY-AFg" firstAttribute="top" secondItem="gsP-1I-9aQ" secondAttribute="top" constant="10" id="Aaz-az-xxl"/>
@@ -165,8 +165,51 @@
                                                 <constraint firstItem="MPD-AA-eIl" firstAttribute="top" secondItem="Cmi-nK-DDG" secondAttribute="top" constant="17" id="ntd-p6-AI8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageLabel" destination="MPD-AA-eIl" id="u6L-iD-A3L"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sendCell" rowHeight="102" id="0lV-MP-Z8p" customClass="PNChatCell">
+                                        <rect key="frame" x="0.0" y="130" width="375" height="102"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0lV-MP-Z8p" id="N8w-ui-Fwi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkN-oc-hbm">
+                                                    <rect key="frame" x="330" y="10" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="7m9-iR-wxv"/>
+                                                        <constraint firstAttribute="height" constant="40" id="D19-n0-M6I"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="login_avatar_default"/>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_send_nor" translatesAutoresizingMaskIntoConstraints="NO" id="kHu-W0-Pnf">
+                                                    <rect key="frame" x="257" y="10" width="68" height="56"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="N8z-Lm-aL0">
+                                                    <rect key="frame" x="277" y="27" width="28" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="N8z-Lm-aL0" firstAttribute="top" secondItem="kHu-W0-Pnf" secondAttribute="top" constant="17" id="14n-QC-NKa"/>
+                                                <constraint firstItem="VkN-oc-hbm" firstAttribute="top" secondItem="N8w-ui-Fwi" secondAttribute="top" constant="10" id="7pS-uz-B1D"/>
+                                                <constraint firstAttribute="trailing" secondItem="VkN-oc-hbm" secondAttribute="trailing" constant="5" id="YxT-Vw-ny1"/>
+                                                <constraint firstItem="VkN-oc-hbm" firstAttribute="leading" secondItem="kHu-W0-Pnf" secondAttribute="trailing" constant="5" id="aZg-sr-ym3"/>
+                                                <constraint firstItem="N8z-Lm-aL0" firstAttribute="leading" secondItem="kHu-W0-Pnf" secondAttribute="leading" constant="20" id="dDl-81-vQe"/>
+                                                <constraint firstItem="kHu-W0-Pnf" firstAttribute="bottom" secondItem="N8z-Lm-aL0" secondAttribute="bottom" constant="17" id="eUO-9l-kYJ"/>
+                                                <constraint firstItem="kHu-W0-Pnf" firstAttribute="top" secondItem="N8w-ui-Fwi" secondAttribute="top" constant="10" id="r3t-Ml-oX4"/>
+                                                <constraint firstItem="kHu-W0-Pnf" firstAttribute="trailing" secondItem="N8z-Lm-aL0" secondAttribute="trailing" constant="20" id="zgb-qS-QJf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="N8z-Lm-aL0" id="rH5-do-I4f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -204,6 +247,9 @@
                                         </constraints>
                                         <state key="normal" image="chat_bottom_up_nor"/>
                                         <state key="highlighted" image="chat_bottom_up_press"/>
+                                        <connections>
+                                            <action selector="selectedPhoto" destination="vgn-XP-D9o" eventType="touchUpInside" id="lLx-pF-ULi"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nKR-gi-zCw">
                                         <rect key="frame" x="44" y="5" width="248" height="34"/>
@@ -379,6 +425,7 @@
         <image name="chat_bottom_voice_nor" width="34" height="34"/>
         <image name="chat_bottom_voice_press" width="34" height="34"/>
         <image name="chat_recive_nor" width="48" height="56"/>
+        <image name="chat_send_nor" width="49" height="56"/>
         <image name="login_avatar_default" width="80" height="80"/>
         <image name="tab_buddy_nor" width="30" height="30"/>
         <image name="tab_qworld_nor" width="30" height="30"/>

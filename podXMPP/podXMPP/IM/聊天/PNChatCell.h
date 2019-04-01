@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CZXMPPTools.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PNChatCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
++ (PNChatCell *)cellWithTableView:(UITableView *)tb indexPath:(NSIndexPath *)indexPath  fetchedResultsController: (NSFetchedResultsController *)fetchedResultsController;
 @end
 
 NS_ASSUME_NONNULL_END
