@@ -7,6 +7,7 @@
 //
 
 #import "PNChartViewController.h"
+#import "PNChatCell.h"
 
 @interface PNChartViewController ()<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UITextViewDelegate>
 /// 聊天tableView
@@ -39,6 +40,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToBottom) name:UIKeyboardDidChangeFrameNotification object:nil];
     
+    self.tableView.estimatedRowHeight = 60;
+    
      [self scrollToBottom]; // 滚动到最低端
     
 }
@@ -47,20 +50,35 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"chartCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
+    PNChatCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
     XMPPMessageArchiving_Message_CoreDataObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if(object.body){
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", object.body];
+        cell.messageLabel.text = object.body;
     }else{
         NSLog(@"对方正在输入...");
     }
     
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = 0;
+    static NSString *ID = @"chartCell";
+    PNChatCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+
+    XMPPMessageArchiving_Message_CoreDataObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    if(object.body){
+        cell.messageLabel.text = object.body;
+   
+        height = [cell.messageLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 17 * 2 + 20;
+        
+        height = height < 60 ? 60 : height;
+    }
+
+    return height;
+
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -75,8 +93,12 @@
     NSLog(@"noti: %@", noti);
     
     CGRect keyboardRect = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    self.bottomViewConstraint.constant = keyboardRect.size.height;
+    self.bottomViewConstraint.constant = keyboardRect.size.height - 34;
   
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+    self.bottomViewConstraint.constant = 0;
 }
 
 #pragma mark - UITextViewDelegate
@@ -96,14 +118,14 @@
     self.bottomViewHeightConstraint.constant = self.inputTextHeight.constant + 10;
     
     
-    if ([text isEqualToString:@"\n"]) {
+    if ([text isEqualToString:@"\n"]) { // 换行
         [self sendMsg:textView.text];
         textView.text = nil;
         
         // 回到原高度
         self.inputTextHeight.constant = 34;
         self.bottomViewHeightConstraint.constant = self.inputTextHeight.constant + 10;
-        return NO;
+        
     }
     return YES;
 }
@@ -164,6 +186,7 @@
     
     NSInteger row = self.fetchedResultsController.fetchedObjects.count;
     
+    if(row == 0) return;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row - 1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }

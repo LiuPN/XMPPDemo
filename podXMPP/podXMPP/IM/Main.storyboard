@@ -60,7 +60,7 @@
         <!--联系人-->
         <scene sceneID="hYl-rF-v5f">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="kEv-R4-mgE" customClass="PLContactViewController" sceneMemberID="viewController">
+                <tableViewController id="kEv-R4-mgE" customClass="PLContactViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6os-Bu-PZD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,7 +114,7 @@
         <!--Chart View Controller-->
         <scene sceneID="kCe-dv-KkT">
             <objects>
-                <viewController id="vgn-XP-D9o" customClass="PNChartViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="vgn-XP-D9o" customClass="PNChartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0eu-Vc-eUz"/>
                         <viewControllerLayoutGuide type="bottom" id="1Hy-L8-riM"/>
@@ -124,16 +124,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="egb-tX-Y3S">
-                                <rect key="frame" x="0.0" y="64" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chartCell" id="Ptg-2Z-rUj">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chartCell" rowHeight="102" id="Ptg-2Z-rUj" customClass="PNChatCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ptg-2Z-rUj" id="gsP-1I-9aQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="101.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0Q-vY-AFg">
+                                                    <rect key="frame" x="15" y="10" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="0W1-NE-7r9"/>
+                                                        <constraint firstAttribute="width" constant="40" id="ODL-zI-008"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="login_avatar_default"/>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_recive_nor" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-nK-DDG">
+                                                    <rect key="frame" x="60" y="10" width="68" height="56"/>
+                                                    <color key="backgroundColor" red="0.94029306989999994" green="0.38864001190000003" blue="0.42983064850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-AA-eIl">
+                                                    <rect key="frame" x="80" y="27" width="28" height="22"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="R0Q-vY-AFg" firstAttribute="leading" secondItem="gsP-1I-9aQ" secondAttribute="leading" constant="15" id="48P-LI-xZs"/>
+                                                <constraint firstItem="R0Q-vY-AFg" firstAttribute="top" secondItem="gsP-1I-9aQ" secondAttribute="top" constant="10" id="Aaz-az-xxl"/>
+                                                <constraint firstItem="Cmi-nK-DDG" firstAttribute="leading" secondItem="R0Q-vY-AFg" secondAttribute="trailing" constant="5" id="HME-UU-0tk"/>
+                                                <constraint firstItem="Cmi-nK-DDG" firstAttribute="top" secondItem="gsP-1I-9aQ" secondAttribute="top" constant="10" id="MCB-eH-82t"/>
+                                                <constraint firstItem="MPD-AA-eIl" firstAttribute="leading" secondItem="Cmi-nK-DDG" secondAttribute="leading" constant="20" id="Oga-8Y-bYn"/>
+                                                <constraint firstItem="Cmi-nK-DDG" firstAttribute="trailing" secondItem="MPD-AA-eIl" secondAttribute="trailing" constant="20" id="QgW-Qw-SuC"/>
+                                                <constraint firstItem="Cmi-nK-DDG" firstAttribute="bottom" secondItem="MPD-AA-eIl" secondAttribute="bottom" constant="17" id="S9c-N9-JIC"/>
+                                                <constraint firstItem="MPD-AA-eIl" firstAttribute="top" secondItem="Cmi-nK-DDG" secondAttribute="top" constant="17" id="ntd-p6-AI8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="MPD-AA-eIl" id="u6L-iD-A3L"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -142,7 +176,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3t-sR-hfn">
-                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qt9-zc-ATq">
                                         <rect key="frame" x="5" y="5" width="34" height="34"/>
@@ -177,9 +211,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="PYS-Qu-Oxq"/>
                                         </constraints>
-                                        <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="10"/>
+                                        <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                                         <connections>
                                             <outlet property="delegate" destination="vgn-XP-D9o" id="5gM-7w-Ajq"/>
                                         </connections>
@@ -225,7 +259,7 @@
         <!--Add Contact View Controller-->
         <scene sceneID="l5M-oj-eTM">
             <objects>
-                <viewController id="6IK-DY-BZY" customClass="PNAddContactViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="6IK-DY-BZY" customClass="PNAddContactViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XMB-gW-frb"/>
                         <viewControllerLayoutGuide type="bottom" id="3Yu-UI-n3U"/>
@@ -238,7 +272,7 @@
                                 <rect key="frame" x="20" y="74" width="335" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                 <connections>
                                     <outlet property="delegate" destination="6IK-DY-BZY" id="Y6G-TY-QuH"/>
                                 </connections>
@@ -344,6 +378,8 @@
         <image name="chat_bottom_up_press" width="34" height="34"/>
         <image name="chat_bottom_voice_nor" width="34" height="34"/>
         <image name="chat_bottom_voice_press" width="34" height="34"/>
+        <image name="chat_recive_nor" width="48" height="56"/>
+        <image name="login_avatar_default" width="80" height="80"/>
         <image name="tab_buddy_nor" width="30" height="30"/>
         <image name="tab_qworld_nor" width="30" height="30"/>
         <image name="tab_recent_nor" width="30" height="30"/>

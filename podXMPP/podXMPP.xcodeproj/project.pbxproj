@@ -23,6 +23,7 @@
 		D0B43A422213F2F8009CDFB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B43A412213F2F8009CDFB3 /* main.m */; };
 		D0B43A4C2213F2F8009CDFB3 /* podXMPPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B43A4B2213F2F8009CDFB3 /* podXMPPTests.m */; };
 		D0B43A572213F2F8009CDFB3 /* podXMPPUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B43A562213F2F8009CDFB3 /* podXMPPUITests.m */; };
+		D0FAC2392251B90C00D70AF5 /* PNChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAC2382251B90C00D70AF5 /* PNChatCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		D0B43A522213F2F8009CDFB3 /* podXMPPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = podXMPPUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B43A562213F2F8009CDFB3 /* podXMPPUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = podXMPPUITests.m; sourceTree = "<group>"; };
 		D0B43A582213F2F8009CDFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0FAC2372251B90C00D70AF5 /* PNChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNChatCell.h; sourceTree = "<group>"; };
+		D0FAC2382251B90C00D70AF5 /* PNChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNChatCell.m; sourceTree = "<group>"; };
 		DD8E7BB415206A6B11A4A132 /* Pods-podXMPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podXMPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-podXMPP/Pods-podXMPP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +163,8 @@
 			children = (
 				D0348F72223BA43100447F9E /* PNChartViewController.h */,
 				D0348F73223BA43100447F9E /* PNChartViewController.m */,
+				D0FAC2372251B90C00D70AF5 /* PNChatCell.h */,
+				D0FAC2382251B90C00D70AF5 /* PNChatCell.m */,
 			);
 			path = "聊天";
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				D0B43A422213F2F8009CDFB3 /* main.m in Sources */,
 				D00B5A062237C371005C822F /* AppDelegate.m in Sources */,
 				D00B59FA2237BECB005C822F /* CZLoginViewController.m in Sources */,
+				D0FAC2392251B90C00D70AF5 /* PNChatCell.m in Sources */,
 				D00B59FF2237BF15005C822F /* CZMainViewController.m in Sources */,
 				D00B59F12237BEAE005C822F /* CZXMPPTools.m in Sources */,
 			);
@@ -588,7 +594,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.seameReader.zhimaguanjia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seameReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -606,7 +612,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.seameReader.zhimaguanjia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seameReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
