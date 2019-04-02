@@ -25,6 +25,8 @@
 		D0B43A572213F2F8009CDFB3 /* podXMPPUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B43A562213F2F8009CDFB3 /* podXMPPUITests.m */; };
 		D0FAC2392251B90C00D70AF5 /* PNChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAC2382251B90C00D70AF5 /* PNChatCell.m */; };
 		D0FAC23F2251F56200D70AF5 /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAC23E2251F56200D70AF5 /* UIImage+Scale.m */; };
+		D0FAC241225206BD00D70AF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FAC240225206BD00D70AF5 /* AVFoundation.framework */; };
+		D0FAC244225206DC00D70AF5 /* PNAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D0FAC243225206DC00D70AF5 /* PNAudioRecorder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,9 @@
 		D0FAC2382251B90C00D70AF5 /* PNChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNChatCell.m; sourceTree = "<group>"; };
 		D0FAC23D2251F56200D70AF5 /* UIImage+Scale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
 		D0FAC23E2251F56200D70AF5 /* UIImage+Scale.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Scale.m"; sourceTree = "<group>"; };
+		D0FAC240225206BD00D70AF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D0FAC242225206DC00D70AF5 /* PNAudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PNAudioRecorder.h; sourceTree = "<group>"; };
+		D0FAC243225206DC00D70AF5 /* PNAudioRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PNAudioRecorder.m; sourceTree = "<group>"; };
 		DD8E7BB415206A6B11A4A132 /* Pods-podXMPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-podXMPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-podXMPP/Pods-podXMPP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0FAC241225206BD00D70AF5 /* AVFoundation.framework in Frameworks */,
 				BAD19DC78A767444529B07C6 /* Pods_podXMPP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +118,7 @@
 		C4DE4D685F06F9737825FA09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0FAC240225206BD00D70AF5 /* AVFoundation.framework */,
 				ABD582EEB5B295379FF8C927 /* Pods_podXMPP.framework */,
 			);
 			name = Frameworks;
@@ -124,6 +131,8 @@
 				D00B59F02237BEAE005C822F /* CZXMPPTools.m */,
 				D0FAC23D2251F56200D70AF5 /* UIImage+Scale.h */,
 				D0FAC23E2251F56200D70AF5 /* UIImage+Scale.m */,
+				D0FAC242225206DC00D70AF5 /* PNAudioRecorder.h */,
+				D0FAC243225206DC00D70AF5 /* PNAudioRecorder.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 			files = (
 				D00B5A0A2237CFE9005C822F /* PLContactViewController.m in Sources */,
 				D0FAC23F2251F56200D70AF5 /* UIImage+Scale.m in Sources */,
+				D0FAC244225206DC00D70AF5 /* PNAudioRecorder.m in Sources */,
 				D00B5A0D2237CFFD005C822F /* PNAddContactViewController.m in Sources */,
 				D0348F74223BA43100447F9E /* PNChartViewController.m in Sources */,
 				D00B59F82237BECB005C822F /* CZRegisterUserViewController.m in Sources */,

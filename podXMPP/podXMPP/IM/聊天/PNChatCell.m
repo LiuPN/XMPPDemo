@@ -8,6 +8,13 @@
 
 #import "PNChatCell.h"
 #import "UIImage+Scale.h"
+#import "PNAudioRecorder.h"
+
+@interface PNChatCell()
+
+@property (nonatomic, strong) NSData *audioData;
+
+@end
 
 @implementation PNChatCell
 
@@ -18,6 +25,9 @@
     
     NSString *ID = (object.isOutgoing) ? @"sendCell" : @"receiveCell";
     PNChatCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    // 注册点击播放音频事件
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(playAudio)];
+    [cell.messageLabel addGestureRecognizer:recognizer];
     
     
     if([object.body isEqualToString:@"image"]){
@@ -40,6 +50,22 @@
             }
         }
         
+    }else if([object.body hasPrefix:@"audio"]){
+        // 音频文件
+        XMPPMessage *msg = object.message;
+        
+        for (XMPPElement *node in msg.children) {
+            
+            if ([node.name isEqualToString:@"attachment"]) {
+                // 音频信息
+                NSData *data = [[NSData alloc] initWithBase64EncodedString:node.stringValue options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                
+                cell.audioData  = data; // 记录二进制
+                cell.messageLabel.text = object.body;
+            }
+        }
+        
+        
     }else{
         // 文字消息
         cell.messageLabel.text = object.body;
@@ -54,6 +80,16 @@
 //    }
     
     return cell;
+}
+
+
+- (void)playAudio{
+    self.messageLabel.textColor = [UIColor redColor];
+    __weak typeof(self) weakSelf = self;
+    [[PNAudioRecorder shareInstance] playAudioWithData:self.audioData completion:^{
+        weakSelf.messageLabel.textColor = [UIColor blackColor];
+    }];
+    
 }
 
 @end

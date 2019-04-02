@@ -8,6 +8,7 @@
 
 #import "PNChartViewController.h"
 #import "PNChatCell.h"
+#import "PNAudioRecorder.h"
 
 @interface PNChartViewController ()<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UITextViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 /// 聊天tableView
@@ -19,6 +20,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputTextHeight;
 /// 底部视图的高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeightConstraint;
+
+/// 按住讲话
+@property (weak, nonatomic) IBOutlet UIButton *recordBtn;
+
+@property (nonatomic, strong) PNAudioRecorder *recorder;
+
 
 @end
 
@@ -133,6 +140,33 @@
     
     
 }
+#pragma mark - 开始录音
+- (IBAction)didclickRecordIcon:(UIButton *)btn{
+    btn.selected = !btn.selected;
+    self.recordBtn.hidden = !btn.selected;
+    [self.view endEditing:YES];
+    self.bottomViewConstraint.constant = 0;
+}
+- (IBAction)startRecord:(id)sender {
+    NSLog(@"开始录音");
+    [self.recorder startRecord];
+}
+- (IBAction)stopRecord:(id)sender {
+    NSLog(@"停止录音");
+    
+    [self.recorder stopRecordSuccess:^(NSURL * _Nonnull url, NSTimeInterval time) {
+        NSLog(@"录音成功");
+        NSString *path = url.path;
+        // 转换成二进制
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        // 发出录音
+        [self sendMsgWithData:data body:[@"audio" stringByAppendingFormat:@": %.f\"", time]];
+        
+    } faild:^{
+        NSLog(@"录音时间太短");
+    }];
+}
+
 
 #pragma mark - 选择照片
 - (IBAction)selectedPhoto {
@@ -148,14 +182,14 @@
     NSData *data = UIImagePNGRepresentation(image);
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    [self sendMsgWithData:data];
+    [self sendMsgWithData:data body:@"image"];
     
     
 }
-- (void)sendMsgWithData:(NSData *)data{
+- (void)sendMsgWithData:(NSData *)data body:(NSString *)body{
     XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:self.chatJID];
     
-    [msg addBody:@"image"];
+    [msg addBody:body];
     // 被迫掉线 图片过大
     NSString *base64Str = [data base64EncodedStringWithOptions:0];
     XMPPElement *attachment = [XMPPElement elementWithName:@"attachment" stringValue:base64Str];
@@ -233,6 +267,12 @@
     _fetchedResultsController.delegate = self;
     
     return _fetchedResultsController;
+}
+- (PNAudioRecorder *)recorder{
+    if (!_recorder) {
+        _recorder = [PNAudioRecorder shareInstance];
+    }
+    return _recorder;
 }
 
 @end

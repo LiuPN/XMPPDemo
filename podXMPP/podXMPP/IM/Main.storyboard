@@ -128,7 +128,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="receiveCell" rowHeight="102" id="Ptg-2Z-rUj" customClass="PNChatCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="receiveCell" rowHeight="102" id="Ptg-2Z-rUj" customClass="PNChatCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ptg-2Z-rUj" id="gsP-1I-9aQ">
@@ -146,7 +146,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_recive_nor" translatesAutoresizingMaskIntoConstraints="NO" id="Cmi-nK-DDG">
                                                     <rect key="frame" x="60" y="10" width="68" height="56"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-AA-eIl">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-AA-eIl">
                                                     <rect key="frame" x="80" y="27" width="28" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -170,7 +170,7 @@
                                             <outlet property="messageLabel" destination="MPD-AA-eIl" id="u6L-iD-A3L"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sendCell" rowHeight="102" id="0lV-MP-Z8p" customClass="PNChatCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="sendCell" rowHeight="102" id="0lV-MP-Z8p" customClass="PNChatCell">
                                         <rect key="frame" x="0.0" y="130" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0lV-MP-Z8p" id="N8w-ui-Fwi">
@@ -188,7 +188,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_send_nor" translatesAutoresizingMaskIntoConstraints="NO" id="kHu-W0-Pnf">
                                                     <rect key="frame" x="257" y="10" width="68" height="56"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="N8z-Lm-aL0">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="msg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="N8z-Lm-aL0">
                                                     <rect key="frame" x="277" y="27" width="28" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -228,7 +228,11 @@
                                             <constraint firstAttribute="height" constant="34" id="xbt-7g-bPE"/>
                                         </constraints>
                                         <state key="normal" image="chat_bottom_voice_nor"/>
-                                        <state key="highlighted" image="chat_bottom_voice_press"/>
+                                        <state key="selected" image="chat_bottom_keyboard_nor"/>
+                                        <state key="highlighted" image="chat_bottom_keyboard_press"/>
+                                        <connections>
+                                            <action selector="didclickRecordIcon:" destination="vgn-XP-D9o" eventType="touchUpInside" id="SgZ-qI-GJ8"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9r-cT-i7G">
                                         <rect key="frame" x="297" y="5" width="34" height="34"/>
@@ -264,15 +268,29 @@
                                             <outlet property="delegate" destination="vgn-XP-D9o" id="5gM-7w-Ajq"/>
                                         </connections>
                                     </textView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSI-81-Eab">
+                                        <rect key="frame" x="44" y="5" width="248" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="按住讲话"/>
+                                        <connections>
+                                            <action selector="startRecord:" destination="vgn-XP-D9o" eventType="touchDown" id="6su-oe-801"/>
+                                            <action selector="stopRecord:" destination="vgn-XP-D9o" eventType="touchUpInside" id="hY7-Eg-Lre"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Tuo-e6-aVS" firstAttribute="leading" secondItem="C9r-cT-i7G" secondAttribute="trailing" constant="5" id="0Rt-uK-xaZ"/>
                                     <constraint firstAttribute="bottom" secondItem="Qt9-zc-ATq" secondAttribute="bottom" constant="5" id="0pI-7X-Ke7"/>
+                                    <constraint firstItem="HSI-81-Eab" firstAttribute="height" secondItem="nKR-gi-zCw" secondAttribute="height" id="AWT-2P-ust"/>
                                     <constraint firstAttribute="bottom" secondItem="C9r-cT-i7G" secondAttribute="bottom" constant="5" id="Bbe-gb-r9P"/>
+                                    <constraint firstItem="HSI-81-Eab" firstAttribute="width" secondItem="nKR-gi-zCw" secondAttribute="width" id="C5K-fS-GEh"/>
                                     <constraint firstAttribute="bottom" secondItem="Tuo-e6-aVS" secondAttribute="bottom" constant="5" id="DFR-rG-KmQ"/>
                                     <constraint firstItem="Qt9-zc-ATq" firstAttribute="leading" secondItem="d3t-sR-hfn" secondAttribute="leading" constant="5" id="EsR-YW-tkl"/>
+                                    <constraint firstItem="HSI-81-Eab" firstAttribute="bottom" secondItem="nKR-gi-zCw" secondAttribute="bottom" id="FfG-r7-sev"/>
                                     <constraint firstItem="C9r-cT-i7G" firstAttribute="leading" secondItem="nKR-gi-zCw" secondAttribute="trailing" constant="5" id="LKY-fL-68Y"/>
+                                    <constraint firstItem="HSI-81-Eab" firstAttribute="leading" secondItem="nKR-gi-zCw" secondAttribute="leading" id="YbE-2v-qE6"/>
                                     <constraint firstAttribute="bottom" secondItem="nKR-gi-zCw" secondAttribute="bottom" constant="5" id="a8e-z8-N4F"/>
                                     <constraint firstAttribute="trailing" secondItem="Tuo-e6-aVS" secondAttribute="trailing" constant="5" id="evS-IT-aWc"/>
                                     <constraint firstItem="nKR-gi-zCw" firstAttribute="leading" secondItem="Qt9-zc-ATq" secondAttribute="trailing" constant="5" id="lhP-4v-Qgr"/>
@@ -295,6 +313,7 @@
                         <outlet property="bottomViewConstraint" destination="8Ns-XC-wWn" id="soF-fg-Dqe"/>
                         <outlet property="bottomViewHeightConstraint" destination="vcs-Sd-JCf" id="bMh-8g-SSD"/>
                         <outlet property="inputTextHeight" destination="PYS-Qu-Oxq" id="agY-qk-b7c"/>
+                        <outlet property="recordBtn" destination="HSI-81-Eab" id="gn6-jM-ctf"/>
                         <outlet property="tableView" destination="egb-tX-Y3S" id="LnP-lO-Qb1"/>
                     </connections>
                 </viewController>
@@ -418,12 +437,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chat_bottom_keyboard_nor" width="34" height="34"/>
+        <image name="chat_bottom_keyboard_press" width="34" height="34"/>
         <image name="chat_bottom_smile_nor" width="34" height="34"/>
         <image name="chat_bottom_smile_press" width="34" height="34"/>
         <image name="chat_bottom_up_nor" width="34" height="34"/>
         <image name="chat_bottom_up_press" width="34" height="34"/>
         <image name="chat_bottom_voice_nor" width="34" height="34"/>
-        <image name="chat_bottom_voice_press" width="34" height="34"/>
         <image name="chat_recive_nor" width="48" height="56"/>
         <image name="chat_send_nor" width="49" height="56"/>
         <image name="login_avatar_default" width="80" height="80"/>
